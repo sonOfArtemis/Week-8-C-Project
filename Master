@@ -1,0 +1,113 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void bubbleSort (double, int);
+	
+void swap (int &, int &);
+
+int main()
+{
+	// reserve space needed for array.
+	const int year = 12;
+	
+	//declare all variables needed for function.
+	double highest, lowest, getAverage;
+	double total = 0;
+	double rainfall[year];
+	
+	// declare array to hold the months.
+	string months[year] = { "January", "February", "March", "April","May", "June", "July", "August", "September","October", "November", "December" };
+	
+	// recieve and validate user input.	
+	for (int month = 0; month < year; month++ )
+		{
+			cout << "Enter rainfall for ";
+			cout << months[month] << ": ";
+			cin >> rainfall[month];
+		
+			while (rainfall[month] < 0)
+			{
+				cout << "\nRainfall must be zero or more per month...";
+				cout << "\nPlease enter positive amount for ";
+				cout << months[month];
+				cout << " again: ";
+				cin >> rainfall[month];
+			}
+		total += rainfall[month];
+		}
+	
+		// calculate total and average rainfall. Print.
+		cout << "Total rainfall: " << total; 
+		cout << endl;
+
+		getAverage = total / year;
+		cout << "Average rainfall: ";
+		cout << getAverage << endl;
+		
+		// defualt min/max to January.
+		string maxMonth, minMonth = "January";
+		
+		// calculate and print high/low.
+		for ( int month = 0; month < year; month++ )
+		{
+			highest = rainfall[0];
+			lowest = rainfall[0];
+			
+			
+			for ( int count = 0; count < year; count++ )
+			{
+				if ( rainfall[count] > highest )
+				{
+					highest = rainfall[count];
+					maxMonth = months[count];
+				}
+				
+				else if ( rainfall[count] < lowest )
+				{
+					lowest = rainfall[count];
+					minMonth = months[count];
+				}
+			}
+		}
+		cout << "Least rainfall in: " << minMonth << endl;
+		cout << "Most rainfall in: " <<  maxMonth << endl;
+	
+	// Bubble sort
+	
+	bubbleSort(rainfall[year], year);
+	{
+		int maxElement;
+		int index;
+		
+		for (maxElement = year-1; maxElement > 0; maxElement --)
+		{
+			for (index = 0; index < maxElement; index++)
+			{
+				if (months[index] > months[index+1])
+				{
+					swap (months[index], months[index + 1]);
+				}
+			}
+		}
+		
+		for (index = 0; index < rainfall[year]; index++)
+		{
+			cout << rainfall[index] << " inches in " << months[index];
+			cout << endl;
+		}
+	}
+	return 0;
+}
+
+void bubbleSort (double, int)
+{
+}
+
+void swap (int &a, int &b)
+{
+	int temp = a;
+	a = b;
+	b = temp;
+}
